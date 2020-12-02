@@ -107,3 +107,5 @@ INNER JOIN loans l
 ON c.id=l.idcustomer
 WHERE l.return_date IS NULL;
 --35
+
+
