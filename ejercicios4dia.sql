@@ -81,14 +81,20 @@ BEGIN
         WHEN reg.hiredate < ADD_MONTHS(sysdate,-12*40) 
         THEN UPDATE emp SET comm=NVL(comm,0)+sal*.2
         WHERE empno = reg.empno;
+
         filasAct:= filasAct+sql%rowcount;
+
         WHEN reg.hiredate < ADD_MONTHS(sysdate,-12*30) 
         THEN UPDATE emp SET comm=NVL(comm,0)+sal*.15
         WHERE empno = reg.empno;
+
         filasAct:= filasAct+sql%rowcount;
+
         ELSE UPDATE emp SET comm=NVL(comm,0)+sal*.1
         WHERE empno = reg.empno;
+
         filasAct:= filasAct+sql%rowcount;
+
         END CASE;
     END IF;
     
@@ -97,15 +103,20 @@ BEGIN
         WHEN LOWER(reg.job) = LOWER('MANAGER') 
         THEN UPDATE emp SET comm=NVL(comm,0)+sal*.01
         WHERE empno = reg.empno;
+
         filasAct:= filasAct+sql%rowcount;
+
         WHEN LOWER(reg.job) = LOWER('ANALYST') 
-        THEN UPDATE emp SET comm=NVL(comm,0)+sal*.12
+        THEN UPDATE emp SET comm=NVL(
+          comm,0)+sal*.12
         WHERE empno = reg.empno;
         filasAct:= filasAct+sql%rowcount;
+
         ELSE UPDATE emp SET comm=NVL(comm,0)+sal*.17
         WHERE empno = reg.empno;
         filasAct:= filasAct+sql%rowcount;
-        END CASE;
+
+      END CASE;
     END IF;
   END LOOP;
   dbms_output.put_line(filasAct);
